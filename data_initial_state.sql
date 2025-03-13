@@ -1,15 +1,8 @@
-CREATE DATABASE IF NOT EXISTS inventory_manager_db;
-
+-- This is the script to fill the tables with data once they have been created
+-- Antes de correr este script, es necesario correr: creador_tablas.sql
 USE inventory_manager_db;
 
--- Create table stores 
-CREATE TABLE IF NOT EXISTS stores (
-	id_store INT AUTO_INCREMENT PRIMARY KEY, 
-    name_store VARCHAR(50) NOT NULL, 
-    max_storage INTEGER NOT NULL, 
-    location VARCHAR(100) NOT NULL
-);
-
+-- Populate Store table 
 INSERT INTO stores (name_store, max_storage, location) VALUES
 ('Almacén Central', 1000, 'Zona Industrial - Calle 12 #45'),
 ('Sucursal Centro', 500, 'Avenida Principal #234 - Centro'),
@@ -22,19 +15,7 @@ INSERT INTO stores (name_store, max_storage, location) VALUES
 ('Tienda Papelería', 350, 'Centro Escolar - Pasillo 1'),
 ('Mega Bodega Fitness', 900, 'Avenida Deportiva - Zona Fitness');
 
--- Create table products  
-CREATE TABLE IF NOT EXISTS products (
-	id_product INT AUTO_INCREMENT PRIMARY KEY,
-    sku_number VARCHAR(20) NOT NULL, 
-    product_name VARCHAR(50) NOT NULL, 
-    description VARCHAR(250) NOT NULL, 
-    unit_price DECIMAL(10,2),
-    id_store INT, 
-    stock INTEGER NOT NULL, 
-    store_location VARCHAR(50) NOT NULL,
-    FOREIGN KEY (id_store) REFERENCES stores(id_store) ON DELETE CASCADE ON UPDATE CASCADE
-    );
-
+-- Populate Products table 
 INSERT INTO products (sku_number, product_name, description, unit_price, id_store, stock, store_location) VALUES
 ('SKU001', 'Ratón Inalámbrico', 'Ratón ergonómico inalámbrico con DPI ajustable.', 25.99, 1, 100, 'Pasillo 3'),
 ('SKU002', 'Cuaderno Universitario', 'Cuaderno universitario de 100 hojas con espiral.', 2.99, 3, 200, 'Pasillo 5'),
@@ -47,14 +28,7 @@ INSERT INTO products (sku_number, product_name, description, unit_price, id_stor
 ('SKU009', 'SSD Externo', 'SSD portátil de 500GB con transferencia rápida.', 89.99, 1, 40, 'Pasillo 3'),
 ('SKU010', 'Botella Térmica', 'Botella de acero inoxidable de 500ml.', 15.99, 3, 150, 'Pasillo 1');
 
--- Create table users 
-CREATE TABLE IF NOT EXISTS users (
-	id_user INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(25),
-    rol VARCHAR(25),
-    email VARCHAR(25)
-);
-
+-- Populate Users table 
 INSERT INTO users (username, rol, email) VALUES
 ('admin_master', 'admin', 'admin@empresa.com'),
 ('operador_juan', 'operator', 'juan@empresa.com'),
@@ -62,27 +36,16 @@ INSERT INTO users (username, rol, email) VALUES
 ('operador_karen', 'operator', 'karen@empresa.com'),
 ('operador_pedro', 'operator', 'pedro@empresa.com');
 
--- Create table transactions 
-CREATE TABLE IF NOT EXISTS transactions (
-	id_transaction INT AUTO_INCREMENT PRIMARY KEY,
-    date_transaction DATETIME,
-    id_user INt,
-    type_transaction VARCHAR(25),
-    id_product INT,
-    quantity INTEGER, 
-    subtotal DECIMAL(10,2),
-    FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_product) REFERENCES products(id_product) ON DELETE CASCADE ON UPDATE CASCADE 
-);
+-- Populate Transactions table
+INSERT INTO transactions (date_transaction, id_user, type_transaction, id_product, quantity) VALUES
+('2023-10-01 10:15:00', 1, 'Compra', 1, 22),
+('2023-10-02 14:30:00', 2, 'Venta', 2, 10),
+('2023-10-03 09:45:00', 3, 'Compra', 3, 3),
+('2023-10-04 16:20:00', 4, 'Venta', 4, 10),
+('2023-10-05 11:10:00', 5, 'Compra', 5, 10),
+('2023-10-06 13:55:00', 1, 'Venta', 6, 4),
+('2023-10-07 08:30:00', 3, 'Compra', 7, 2),
+('2023-10-08 17:40:00', 2, 'Venta', 8, 30),
+('2023-10-09 12:25:00', 4, 'Compra', 9, 1),
+('2023-10-10 15:05:00', 5, 'Venta', 10, 2);
 
-INSERT INTO transactions (date_transaction, id_user, type_transaction, id_product, quantity, subtotal) VALUES
-('2023-10-01 10:15:00', 1, 'Compra', 1, 2, 50.00),
-('2023-10-02 14:30:00', 2, 'Venta', 2, 1, 25.00),
-('2023-10-03 09:45:00', 3, 'Compra', 3, 3, 75.00),
-('2023-10-04 16:20:00', 4, 'Venta', 4, 2, 60.00),
-('2023-10-05 11:10:00', 5, 'Compra', 5, 1, 30.00),
-('2023-10-06 13:55:00', 1, 'Venta', 6, 4, 100.00),
-('2023-10-07 08:30:00', 3, 'Compra', 7, 2, 40.00),
-('2023-10-08 17:40:00', 2, 'Venta', 8, 3, 90.00),
-('2023-10-09 12:25:00', 4, 'Compra', 9, 1, 20.00),
-('2023-10-10 15:05:00', 5, 'Venta', 10, 2, 50.00);
