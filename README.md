@@ -1,9 +1,12 @@
-FASE 1 
+FASE 2
 
-En la primera fase del proyecto "Gestor de Inventario" se trabajó principalmente en el diseño de la base de datos y creación de la misma en MySQL. 
-La rama fase-1 contiene varios sripts SQL, que tienen como objetivo organizar las tablas, triggers y procedures creados. 
+La fase dos del proyecto contiene las siguientes mejoras:
 
-main.sql posee el script completo que, al ser ejecutado de forma secuencial, da como resultado la replicación de la base de datos de forma local. 
+- Implementación de partición vertical
+- Consultas y reportes con filtros y reportes agrupados
+- Implementación de roles y permisos
+- Configuración de MongoDB para datos históricos
+- Simuación de registros históricos y transacciones con MongoDB
 
-En el siguiente link se encuentra el diagrama Entidad-Relación, nombres de los integrantes del grupo y documentación del proyecto. 
-https://docs.google.com/document/d/1oCyOajqyKVdzWp-hZG9BU6RzEI91C6wQmuUBt5awumc/edit?tab=t.0
+A continuación se encuentra un link con los videos de los integrantes del equipo y la documentación 
+https://drive.google.com/drive/folders/1YjWTYpAwS-DfQVLMd0w2RR_3K50fyh0L 
